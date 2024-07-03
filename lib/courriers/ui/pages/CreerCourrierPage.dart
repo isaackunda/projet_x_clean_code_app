@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projet_x/courriers/ui/pages/CreerCourrierController.dart';
 
 class CreerCourrierPage extends StatefulWidget {
   const CreerCourrierPage({super.key});
@@ -126,7 +127,13 @@ class _CreerCourrierPageState extends State<CreerCourrierPage> {
           //dateReception
           InputDatePickerFormField(firstDate: DateTime(2020), lastDate: DateTime(2024)),
           const SizedBox(height: 5,),
-          ElevatedButton(onPressed: onPressed, child: Text('Enregistrer')),
+          ElevatedButton(
+              onPressed: (){
+                var crtl = CreerCourrierController();
+                crtl.creerCourrier();
+              },
+              child: const Text('Enregistrer')
+          ),
         ],
       ),
     );
