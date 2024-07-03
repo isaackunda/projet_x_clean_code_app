@@ -8,10 +8,11 @@ class CreerCourrierController {
         objet: data.objet,
         expediteur: data.expediteur,
         destinataire: data.destinataire,
-        typeId: data.typeId,
-        userId: data.,
+        type: data.type,
+        agent: data.agent,
         dateEmission: "",
-        dateReception: "");
+        dateReception: ""
+    );
 
     print(fakeData);
     var service = CourrierServiceV1Impl();

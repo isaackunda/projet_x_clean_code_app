@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:projet_x/courriers/ui/pages/CreerCourrierController.dart';
 
+import '../../business/model/Courrier.dart';
+
 class CreerCourrierPage extends StatefulWidget {
   const CreerCourrierPage({super.key});
 
@@ -9,7 +11,6 @@ class CreerCourrierPage extends StatefulWidget {
 }
 
 class _CreerCourrierPageState extends State<CreerCourrierPage> {
-
   var objetCrtl = TextEditingController(text: "");
   var destCrtl = TextEditingController(text: "");
   String expediteur = 'Exp 1';
@@ -64,23 +65,26 @@ class _CreerCourrierPageState extends State<CreerCourrierPage> {
             ),
             controller: objetCrtl,
           ),
-          const SizedBox(height: 5,),
+          const SizedBox(
+            height: 5,
+          ),
           //Expediteur
           DropdownButton(
-            value: expediteur,
+              value: expediteur,
               items: expediteurs.map((String items) {
                 return DropdownMenuItem(
                   value: items,
-                    child: Text(items),
+                  child: Text(items),
                 );
               }).toList(),
-              onChanged: (String? newValue){
+              onChanged: (String? newValue) {
                 setState(() {
                   expediteur = newValue!;
                 });
-              }
+              }),
+          const SizedBox(
+            height: 5,
           ),
-          const SizedBox(height: 5,),
           //Destinataire
           TextFormField(
             decoration: const InputDecoration(
@@ -88,7 +92,9 @@ class _CreerCourrierPageState extends State<CreerCourrierPage> {
             ),
             controller: destCrtl,
           ),
-          const SizedBox(height: 5,),
+          const SizedBox(
+            height: 5,
+          ),
           //Type
           DropdownButton(
               value: type,
@@ -98,13 +104,14 @@ class _CreerCourrierPageState extends State<CreerCourrierPage> {
                   child: Text(items),
                 );
               }).toList(),
-              onChanged: (String? newValue){
+              onChanged: (String? newValue) {
                 setState(() {
                   type = newValue!;
                 });
-              }
+              }),
+          const SizedBox(
+            height: 5,
           ),
-          const SizedBox(height: 5,),
           //Agents
           DropdownButton(
               value: agent,
@@ -114,26 +121,41 @@ class _CreerCourrierPageState extends State<CreerCourrierPage> {
                   child: Text(items),
                 );
               }).toList(),
-              onChanged: (String? newValue){
+              onChanged: (String? newValue) {
                 setState(() {
                   agent = newValue!;
                 });
-              }
+              }),
+          const SizedBox(
+            height: 5,
           ),
-          const SizedBox(height: 5,),
           //dateEmission
-          InputDatePickerFormField(firstDate: DateTime(2020), lastDate: DateTime(2024)),
-          const SizedBox(height: 5,),
-          //dateReception
-          InputDatePickerFormField(firstDate: DateTime(2020), lastDate: DateTime(2024)),
-          const SizedBox(height: 5,),
-          ElevatedButton(
-              onPressed: (){
-                var crtl = CreerCourrierController();
-                crtl.creerCourrier();
-              },
-              child: const Text('Enregistrer')
+          InputDatePickerFormField(
+              firstDate: DateTime(2020), lastDate: DateTime(2024)),
+          const SizedBox(
+            height: 5,
           ),
+          //dateReception
+          InputDatePickerFormField(
+              firstDate: DateTime(2020), lastDate: DateTime(2024)),
+          const SizedBox(
+            height: 5,
+          ),
+          ElevatedButton(
+              onPressed: () {
+                var data = Courrier(
+                    ref: '#030720240011',
+                    objet: objetCrtl.toString(),
+                    expediteur: expediteur,
+                    destinataire: destCrtl.toString(),
+                    type: type,
+                    agent: agent,
+                    dateEmission: '',
+                    dateReception: '');
+                var crtl = CreerCourrierController();
+                crtl.creerCourrier(data);
+              },
+              child: const Text('Enregistrer')),
         ],
       ),
     );

@@ -10,8 +10,8 @@ class Courrier {
   String objet;
   String expediteur;
   String destinataire;
-  int typeId;
-  int userId;
+  String type;
+  String agent;
   String dateEmission;
   String dateReception;
 
@@ -21,8 +21,8 @@ class Courrier {
     required this.objet,
     required this.expediteur,
     required this.destinataire,
-    required this.typeId,
-    required this.userId,
+    required this.type,
+    required this.agent,
     required this.dateEmission,
     required this.dateReception
   });
@@ -33,8 +33,8 @@ class Courrier {
     objet: json["objet"],
     expediteur: json["expediteur"],
     destinataire: json["destinataire"],
-    typeId: json["type_id"],
-    userId: json["user_id"],
+    type: json["type_id"],
+    agent: json["user_id"],
     dateEmission: json["date_emis"],
     dateReception: json["date_recu"],
   );
@@ -45,8 +45,8 @@ class Courrier {
     "objet": objet,
     "expediteur": expediteur,
     "destinataire": destinataire,
-    "type_id": typeId,
-    "user_id": userId,
+    "type_id": type,
+    "user_id": agent,
     "date_emis": dateEmission,
     "date_recu": dateReception,
   };
