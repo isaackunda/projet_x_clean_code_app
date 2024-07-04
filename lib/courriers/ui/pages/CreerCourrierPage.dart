@@ -55,108 +55,120 @@ class _CreerCourrierPageState extends State<CreerCourrierPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          //Objet
-          TextFormField(
-            decoration: const InputDecoration(
-              hintText: 'Objet',
-            ),
-            controller: objetCrtl,
+    return Scaffold(
+      appBar: AppBar(
+        //backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text(
+          'Créer un courrier',
+          style: TextStyle(
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.w600,
           ),
-          const SizedBox(
-            height: 5,
+          textAlign: TextAlign.center,
+        ),
+      ),
+      body: Center(
+        child: Container(
+          width: 300,
+          child: ListView(
+            children: [
+              //Objet
+              TextFormField(
+                decoration: const InputDecoration(
+                  hintText: 'Objet',
+                ),
+                controller: objetCrtl,
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              //Expediteur
+              DropdownButton(
+                  value: expediteur,
+                  items: expediteurs.map((String items) {
+                    return DropdownMenuItem(
+                      value: items,
+                      child: Text(items),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      expediteur = newValue!;
+                    });
+                  }),
+              const SizedBox(
+                height: 5,
+              ),
+              //Destinataire
+              TextFormField(
+                decoration: const InputDecoration(
+                  hintText: 'Destinataire',
+                ),
+                controller: destCrtl,
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              //Type
+              DropdownButton(
+                  value: type,
+                  items: types.map((String items) {
+                    return DropdownMenuItem(
+                      value: items,
+                      child: Text(items),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      type = newValue!;
+                    });
+                  }),
+              const SizedBox(
+                height: 5,
+              ),
+              //Agents
+              DropdownButton(
+                  value: agent,
+                  items: agents.map((String items) {
+                    return DropdownMenuItem(
+                      value: items,
+                      child: Text(items),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      agent = newValue!;
+                    });
+                  }),
+              const SizedBox(
+                height: 5,
+              ),
+              //dateEmission
+              InputDatePickerFormField(
+                fieldLabelText: 'Date d\'emission du courrier',
+                  firstDate: DateTime(2020), lastDate: DateTime(2024)),
+              const SizedBox(
+                height: 5,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    var data = Courrier(
+                        ref: '#030720240011',
+                        objet: objetCrtl.toString(),
+                        expediteur: expediteur,
+                        destinataire: destCrtl.toString(),
+                        type: type,
+                        agent: agent,
+                        dateEmission: '',
+                        dateReception: '',
+                        etat: 'Enregitrer');
+                    var crtl = CreerCourrierController();
+                    crtl.creerCourrier(data);
+                  },
+                  child: const Text('ENREGISTRER')),
+            ],
           ),
-          //Expediteur
-          DropdownButton(
-              value: expediteur,
-              items: expediteurs.map((String items) {
-                return DropdownMenuItem(
-                  value: items,
-                  child: Text(items),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {
-                setState(() {
-                  expediteur = newValue!;
-                });
-              }),
-          const SizedBox(
-            height: 5,
-          ),
-          //Destinataire
-          TextFormField(
-            decoration: const InputDecoration(
-              hintText: 'Destinataire',
-            ),
-            controller: destCrtl,
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          //Type
-          DropdownButton(
-              value: type,
-              items: types.map((String items) {
-                return DropdownMenuItem(
-                  value: items,
-                  child: Text(items),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {
-                setState(() {
-                  type = newValue!;
-                });
-              }),
-          const SizedBox(
-            height: 5,
-          ),
-          //Agents
-          DropdownButton(
-              value: agent,
-              items: agents.map((String items) {
-                return DropdownMenuItem(
-                  value: items,
-                  child: Text(items),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {
-                setState(() {
-                  agent = newValue!;
-                });
-              }),
-          const SizedBox(
-            height: 5,
-          ),
-          //dateEmission
-          InputDatePickerFormField(
-              firstDate: DateTime(2020), lastDate: DateTime(2024)),
-          const SizedBox(
-            height: 5,
-          ),
-          //dateReception
-          InputDatePickerFormField(
-              firstDate: DateTime(2020), lastDate: DateTime(2024)),
-          const SizedBox(
-            height: 5,
-          ),
-          ElevatedButton(
-              onPressed: () {
-                var data = Courrier(
-                    ref: '#030720240011',
-                    objet: objetCrtl.toString(),
-                    expediteur: expediteur,
-                    destinataire: destCrtl.toString(),
-                    type: type,
-                    agent: agent,
-                    dateEmission: '',
-                    dateReception: '');
-                var crtl = CreerCourrierController();
-                crtl.creerCourrier(data);
-              },
-              child: const Text('Enregistrer')),
-        ],
+        ),
       ),
     );
   }

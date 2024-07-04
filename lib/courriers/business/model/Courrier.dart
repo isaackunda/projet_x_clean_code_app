@@ -12,6 +12,7 @@ class Courrier {
   String destinataire;
   String type;
   String agent;
+  String etat;
   String dateEmission;
   String dateReception;
 
@@ -23,6 +24,7 @@ class Courrier {
     required this.destinataire,
     required this.type,
     required this.agent,
+    required this.etat,
     required this.dateEmission,
     required this.dateReception
   });
@@ -35,6 +37,7 @@ class Courrier {
     destinataire: json["destinataire"],
     type: json["type_id"],
     agent: json["user_id"],
+    etat: json["etat_id"],
     dateEmission: json["date_emis"],
     dateReception: json["date_recu"],
   );
@@ -47,6 +50,7 @@ class Courrier {
     "destinataire": destinataire,
     "type_id": type,
     "user_id": agent,
+    "etat_id": etat,
     "date_emis": dateEmission,
     "date_recu": dateReception,
   };
